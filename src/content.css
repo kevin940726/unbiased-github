@@ -28,7 +28,7 @@ a.author:hover,
 /* issues/PRs page author names */
 a[data-hovercard-type="user"] {
   color: var(--unbiased-color) !important;
-  animation: user-name 0s;
+  animation: user-name 1ms;
 }
 
 /* Hide every profile picture */
