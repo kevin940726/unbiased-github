@@ -35,10 +35,12 @@ a[data-hovercard-type="user"] {
 img.avatar:not([alt='']):not([data-src]),
 .avatar > img:not([alt='']):not([data-src]) {
   content: url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png);
+  pointer-events: none;
 }
 /* Except for yourselves in the top right corner */
 .Header-link > img.avatar:not([alt='']):not([data-src]) {
   content: none;
+  pointer-events: auto;
 }
 
 /* Hide all user profile pictures and names in reaction button (injected by refined-github) */
