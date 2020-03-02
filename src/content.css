@@ -54,7 +54,7 @@ button.reaction-summary-item:after {
 }
 
 /* Hide comment labels except for "Author" and "Member" */
-.timeline-comment-label:not([aria-label='This user is the author of this pull request.']):not([aria-label*='a member of the']) {
+.timeline-comment-label:not([aria-label*='the author of']):not([aria-label*='a member of the']) {
   display: none;
 }
 
