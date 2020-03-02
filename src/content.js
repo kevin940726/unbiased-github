@@ -2,6 +2,8 @@ import './content.css';
 
 const USER_NAME_POOLS = {};
 
+document.documentElement.classList.add('unbiased');
+
 function generateRandomUnbiasedName(length) {
   return Math.random()
     .toString(36)

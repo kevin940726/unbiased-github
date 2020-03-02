@@ -24,7 +24,9 @@ a.author:hover,
 /* Inside hovercard */
 .hovercard-icon + div > span.text-bold,
 /* Head ref branch inside hovercard */
-.commit-ref:not(.base-ref) > .user {
+.commit-ref:not(.base-ref) > .user,
+/* issues/PRs page author names */
+a[data-hovercard-type="user"] {
   color: var(--unbiased-color) !important;
   animation: user-name 0s;
 }
@@ -57,4 +59,10 @@ button.reaction-summary-item:after {
 /* Hide participant avatars */
 #partial-users-participants .participation-avatars {
   display: none !important;
+}
+
+/* issues/PRs page avatar stacks */
+.AvatarStack .tooltipped:before,
+.AvatarStack .tooltipped:after {
+  content: none;
 }
