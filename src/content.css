@@ -32,13 +32,19 @@ a[data-hovercard-type="user"] {
 }
 
 /* Hide every profile picture */
-img.avatar:not([alt='']):not([data-src]),
-.avatar > img:not([alt='']):not([data-src]) {
+img.avatar:not([alt='']),
+.avatar > img:not([alt='']) {
   content: url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png);
   pointer-events: none;
 }
 /* Except for yourselves in the top right corner */
-.Header-link > img.avatar:not([alt='']):not([data-src]) {
+.Header-link > img.avatar:not([alt='']) {
+  content: none;
+  pointer-events: auto;
+}
+/* Or in checks part of the PR (mostly bots here) */
+[data-updatable-content-scroll-position-id='merge-status-list']
+  img.avatar:not([alt='']) {
   content: none;
   pointer-events: auto;
 }
