@@ -1,0 +1,60 @@
+:root {
+  --unbiased-color: transparent;
+}
+
+*[data-biased-user-name] {
+  --unbiased-color: ...;
+}
+
+@keyframes user-name {
+}
+
+/* Hide user names */
+a.author,
+a.author:hover,
+/* Mentions */
+.user-mention,
+/* Assignees */
+.assignee,
+.assignee.link-gray-dark,
+/* Edit history */
+.js-comment-edit-history-menu .v-align-middle.text-bold,
+/* Head ref branch */
+.commit-ref.head-ref span:first-child:not(:last-child),
+/* Inside hovercard */
+.hovercard-icon + div > span.text-bold,
+/* Head ref branch inside hovercard */
+.commit-ref:not(.base-ref) > .user {
+  color: var(--unbiased-color) !important;
+  animation: user-name 0s;
+}
+
+/* Hide every profile picture */
+img.avatar:not([alt='']):not([data-src]),
+.avatar > img:not([alt='']):not([data-src]) {
+  content: url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png);
+}
+/* Except for yourselves in the top right corner */
+.Header-link > img.avatar:not([alt='']):not([data-src]) {
+  content: none;
+}
+
+/* Hide all user profile pictures and names in reaction button (injected by refined-github) */
+button.reaction-summary-item > a {
+  display: none;
+}
+/* Hide reaction hover tooltip */
+button.reaction-summary-item:before,
+button.reaction-summary-item:after {
+  content: none;
+}
+
+/* Hide comment labels except for "Author" and "Member" */
+.timeline-comment-label:not([aria-label='This user is the author of this pull request.']):not([aria-label*='a member of the']) {
+  display: none;
+}
+
+/* Hide participant avatars */
+#partial-users-participants .participation-avatars {
+  display: none !important;
+}

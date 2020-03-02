@@ -1,0 +1,24 @@
+{
+  "name": "unbiased-github",
+  "version": "0.0.0",
+  "description": "Encourage unbiased reviews and discussions on GitHub",
+  "main": "index.js",
+  "repository": "https://github.com/kevin940726/unbiased-github",
+  "author": "Kai Hao",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "yarn build --watch"
+  },
+  "devDependencies": {
+    "prettier": "1.19.1",
+    "rollup": "^1.32.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-postcss": "^2.1.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}

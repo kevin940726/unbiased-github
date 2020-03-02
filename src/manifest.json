@@ -1,0 +1,18 @@
+{
+  "name": "unbiased-github",
+  "version": "0.0.0",
+  "description": "Encourage unbiased reviews and discussions on GitHub",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/issue/*",
+        "https://github.com/*/pull/*",
+        "https://gist.github.com/*"
+      ],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
