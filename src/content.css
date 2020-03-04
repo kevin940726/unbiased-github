@@ -9,6 +9,8 @@
 
 @keyframes user-name {
 }
+@keyframes bot-label {
+}
 
 /* Hide user names */
 a.author,
@@ -30,6 +32,10 @@ a.author:hover,
 a[data-hovercard-type="user"] {
   color: var(--unbiased-color) !important;
   animation: user-name 1ms;
+}
+
+a.author + .Label--outline {
+  animation: bot-label 1ms;
 }
 
 /* Hide every profile picture */

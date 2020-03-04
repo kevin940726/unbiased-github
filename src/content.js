@@ -1,6 +1,8 @@
+import { insertDynamicStyle } from './dom-utils';
 import './content.css';
 
 const USER_NAME_POOLS = {};
+const BOT_USER_NAMES = new Set();
 const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-]+)/g;
 let userLoginName;
 
@@ -35,14 +37,12 @@ setTimeout(() => {
     userLoginName = userLoginMeta.getAttribute('content');
   }
 
-  const style = document.createElement('style');
-  style.innerHTML = `
-    img[alt="${userLoginName}"], img[alt="@${userLoginName}"] {
-      content: none !important;
-      pointer-events: auto !important;
-    }
-  `;
-  document.head.appendChild(style);
+  insertDynamicStyle(`
+img[alt="${userLoginName}"], img[alt="@${userLoginName}"] {
+  content: none !important;
+  pointer-events: auto !important;
+}
+  `);
 }, 0);
 
 // Unbias reaction tooltips
@@ -67,9 +67,12 @@ document.addEventListener('mouseover', e => {
   }
 });
 
-// Observe every user name and "unbias" each one of them
 document.addEventListener('animationstart', e => {
-  if (e.animationName === 'user-name') {
+  if (e.animationName === 'bot-label' && e.target.innerText === 'bot') {
+    // Observe bot labels and record their names
+    showUnbiasedName(e.target.previousElementSibling);
+  } else if (e.animationName === 'user-name') {
+    // Observe every user name and "unbias" each one of them
     unbiasUserName(e.target);
   }
 });
@@ -87,8 +90,12 @@ function unbiasUserName(element) {
     return;
   }
 
-  // Don't unbias yourselves
-  if (userLoginName && userName === userLoginName) {
+  if (
+    // Don't unbias yourselves
+    (userLoginName && userName === userLoginName) ||
+    // Or bots
+    BOT_USER_NAMES.has(userName)
+  ) {
     element.dataset.biasedUserName = prefix + userName;
     return;
   }
@@ -96,6 +103,31 @@ function unbiasUserName(element) {
   const unbiasedName = getUnbiasedName(userName);
   element.innerText = prefix + unbiasedName;
   element.dataset.biasedUserName = prefix + userName;
+}
+
+function showUnbiasedName(element) {
+  const biasedUserName = element.dataset.biasedUserName;
+  let userName;
+
+  if (biasedUserName) {
+    userName = biasedUserName.startsWith('@')
+      ? biasedUserName.slice(1)
+      : biasedUserName;
+    element.innerText = biasedUserName;
+  } else {
+    userName = element.innerText;
+  }
+
+  if (!BOT_USER_NAMES.has(userName)) {
+    BOT_USER_NAMES.add(userName);
+    insertDynamicStyle(`
+img[alt="${userName}"], img[alt="@${userName}"] {
+  content: none !important;
+  pointer-events: auto !important;
+}
+    `);
+  }
+  delete USER_NAME_POOLS[userName];
 }
 
 function getUnbiasedName(userName) {
