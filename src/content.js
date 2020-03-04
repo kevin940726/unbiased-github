@@ -114,7 +114,7 @@ function unbiasUserName(element) {
     const href = element.getAttribute('href');
     const unbiasedHref = href.replace(
       /\/([\w-_]+)$/,
-      (_, name) => `/__unbiased/?unbiased-name=${btoa(name)}`
+      (_, name) => `/@unbiased/?unbiased-name=${btoa(name)}`
     );
     element.setAttribute('href', unbiasedHref);
   }

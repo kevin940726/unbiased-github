@@ -15,7 +15,7 @@ function unbiasedNameRedirectHandler(details) {
 chrome.webRequest.onBeforeRequest.addListener(
   unbiasedNameRedirectHandler,
   {
-    urls: ['https://github.com/__unbiased/*'],
+    urls: ['https://github.com/@unbiased/*'],
     types: ['main_frame', 'sub_frame', 'image', 'xmlhttprequest'],
   },
   ['blocking']
