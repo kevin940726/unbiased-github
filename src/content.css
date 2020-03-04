@@ -3,6 +3,7 @@
 }
 
 *[data-biased-user-name] {
+  /* Invalidate the variable */
   --unbiased-color: ...;
 }
 
@@ -52,11 +53,6 @@ img.avatar:not([alt='']),
 /* Hide all user profile pictures and names in reaction button (injected by refined-github) */
 button.reaction-summary-item > a {
   display: none;
-}
-/* Hide reaction hover tooltip */
-button.reaction-summary-item:before,
-button.reaction-summary-item:after {
-  content: none;
 }
 
 /* Hide comment labels except for "Author" and "Member" */
