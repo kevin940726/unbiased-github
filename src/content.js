@@ -58,6 +58,11 @@ document.addEventListener('mouseover', e => {
     const unbiasedReaction = label.replace(
       REACTION_REGEX,
       (match, p1, userName) => {
+        // Don't unbias yourselves
+        if (userName === userLoginName) {
+          return p1 + userName;
+        }
+
         return p1 + getUnbiasedName(userName);
       }
     );
