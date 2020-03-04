@@ -3,7 +3,7 @@ import './content.css';
 
 const USER_NAME_POOLS = {};
 const BOT_USER_NAMES = new Set();
-const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-]+)/g;
+const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-_]+)/g;
 let userLoginName;
 
 document.documentElement.classList.add('unbiased');
@@ -108,6 +108,16 @@ function unbiasUserName(element) {
   const unbiasedName = getUnbiasedName(userName);
   element.innerText = prefix + unbiasedName;
   element.dataset.biasedUserName = prefix + userName;
+
+  // Unbias link href, the link will be redirected by background.js
+  if (element.nodeName === 'A' && element.getAttribute('href')) {
+    const href = element.getAttribute('href');
+    const unbiasedHref = href.replace(
+      /\/([\w-_]+)$/,
+      (_, name) => `/__unbiased/?unbiased-name=${btoa(name)}`
+    );
+    element.setAttribute('href', unbiasedHref);
+  }
 }
 
 function showUnbiasedName(element) {
