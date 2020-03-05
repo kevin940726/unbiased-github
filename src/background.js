@@ -1,3 +1,5 @@
+import { decryptUserName } from './unbiased-names';
+
 function unbiasedNameRedirectHandler(details) {
   const { origin, searchParams } = new URL(details.url);
 
@@ -7,8 +9,10 @@ function unbiasedNameRedirectHandler(details) {
     return {};
   }
 
+  const userName = decryptUserName(unbiasedName);
+
   return {
-    redirectUrl: `${origin}/${atob(unbiasedName)}`,
+    redirectUrl: `${origin}/${userName}`,
   };
 }
 

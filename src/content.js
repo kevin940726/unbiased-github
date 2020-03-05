@@ -1,18 +1,17 @@
 import { insertDynamicStyle } from './dom-utils';
+import {
+  getUnbiasedName,
+  removeUnbiasedName,
+  addBot,
+  isBot,
+  encryptUserName,
+} from './unbiased-names';
 import './content.css';
 
-const USER_NAME_POOLS = {};
-const BOT_USER_NAMES = new Set();
 const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-_]+)/g;
 let userLoginName;
 
 document.documentElement.classList.add('unbiased');
-
-function generateRandomUnbiasedName(length) {
-  return Math.random()
-    .toString(36)
-    .slice(2, 2 + length);
-}
 
 // Disable hovercard on type of "user"
 document.addEventListener(
@@ -99,7 +98,7 @@ function unbiasUserName(element) {
     // Don't unbias yourselves
     (userLoginName && userName === userLoginName) ||
     // Or bots
-    BOT_USER_NAMES.has(userName)
+    isBot(userName)
   ) {
     element.dataset.biasedUserName = prefix + userName;
     return;
@@ -114,7 +113,7 @@ function unbiasUserName(element) {
     const href = element.getAttribute('href');
     const unbiasedHref = href.replace(
       /\/([\w-_]+)$/,
-      (_, name) => `/@unbiased/?unbiased-name=${btoa(name)}`
+      (_, name) => `/@unbiased/?unbiased-name=${encryptUserName(name)}`
     );
     element.setAttribute('href', unbiasedHref);
   }
@@ -133,8 +132,8 @@ function showUnbiasedName(element) {
     userName = element.innerText;
   }
 
-  if (!BOT_USER_NAMES.has(userName)) {
-    BOT_USER_NAMES.add(userName);
+  if (!isBot(userName)) {
+    addBot(userName);
     insertDynamicStyle(`
 img[alt="${userName}"], img[alt="@${userName}"] {
   content: none !important;
@@ -142,13 +141,5 @@ img[alt="${userName}"], img[alt="@${userName}"] {
 }
     `);
   }
-  delete USER_NAME_POOLS[userName];
-}
-
-function getUnbiasedName(userName) {
-  if (!USER_NAME_POOLS[userName]) {
-    USER_NAME_POOLS[userName] = generateRandomUnbiasedName(userName.length);
-  }
-
-  return USER_NAME_POOLS[userName];
+  removeUnbiasedName(userName);
 }
