@@ -14,4 +14,4 @@ yarn # Install dependencies
 yarn dev # Build and watch the files
 ```
 
-Go to [chrome://extensions/](chrome://extensions/) and click **Load unpacked**, and select the **dist** folder in the project root.
+Go to `chrome://extensions` and click **Load unpacked**, and select the **dist** folder in the project root.
