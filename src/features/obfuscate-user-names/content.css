@@ -1,13 +1,4 @@
-:root {
-  --unbiased-color: transparent;
-}
-
-*[data-biased-user-name] {
-  /* Invalidate the variable */
-  --unbiased-color: ...;
-}
-
 /* This is injected by postcss plugin during build time */
 $USER_NAME_SELECTOR {
-  color: var(--unbiased-color) !important;
+  color: transparent !important;
 }

@@ -16,6 +16,8 @@ export const USER_NAME_SELECTOR = [
   '.commit-ref:not(.base-ref) > .user',
   /* issues/PRs page author names */
   'a[data-hovercard-type="user"]',
-].join(',');
+]
+  .map(selector => selector + ':not([data-biased-user-name])')
+  .join(',');
 
 export const BOT_SELECTOR = 'a.author + .Label--outline';
