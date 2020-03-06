@@ -1,5 +1,6 @@
 import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
+import resolve from '@rollup/plugin-node-resolve';
 import vars from 'postcss-simple-vars';
 import { USER_NAME_SELECTOR } from './src/css-variables';
 
@@ -15,7 +16,7 @@ export default [
         targets: [{ src: 'src/manifest.json', dest: 'dist' }],
       }),
       postcss({
-        extract: true,
+        extract: 'dist/content.css',
         plugins: [
           vars({
             variables: {
@@ -24,6 +25,7 @@ export default [
           }),
         ],
       }),
+      resolve(),
     ],
   },
   {

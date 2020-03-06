@@ -1,11 +1,12 @@
-import { USER_NAME_SELECTOR } from '../css-variables';
-import { observe } from '../utils/dom-utils';
+import { USER_NAME_SELECTOR } from '../../css-variables';
+import { observe } from '../../utils/dom-utils';
 import {
   getUnbiasedName,
   isBot,
   encryptUserName,
-} from '../utils/unbiased-names';
-import getUserLoginName from '../utils/get-user-login-name';
+} from '../../utils/unbiased-names';
+import getUserLoginName from '../../utils/get-user-login-name';
+import './content.css';
 
 function obfuscateUserName(element) {
   let userName = element.innerText;

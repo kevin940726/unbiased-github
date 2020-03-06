@@ -1,0 +1,4 @@
+/* Hide comment labels except for "Author" and "Member" */
+.timeline-comment-label:not([aria-label*='the author of']):not([aria-label*='a member of the']) {
+  display: none;
+}

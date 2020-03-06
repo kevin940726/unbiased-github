@@ -1,5 +1,6 @@
-import getUserLoginName from '../utils/get-user-login-name';
-import { getUnbiasedName } from '../utils/unbiased-names';
+import getUserLoginName from '../../utils/get-user-login-name';
+import { getUnbiasedName } from '../../utils/unbiased-names';
+import './content.css';
 
 const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-_]+)/g;
 

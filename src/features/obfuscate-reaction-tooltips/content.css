@@ -1,0 +1,4 @@
+/* Hide all user profile pictures and names in reaction button (injected by refined-github) */
+button.reaction-summary-item > a {
+  display: none;
+}
