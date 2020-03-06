@@ -1,4 +1,4 @@
-import { decryptUserName } from './unbiased-names';
+import { decryptUserName } from './utils/unbiased-names';
 
 function unbiasedNameRedirectHandler(details) {
   const { origin, searchParams } = new URL(details.url);

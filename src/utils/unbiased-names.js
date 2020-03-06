@@ -1,4 +1,4 @@
-import getRandomID from './human-readable-ids/index.js';
+import getRandomID from './human-readable-ids/index';
 
 const NAMES = {};
 const BOT_NAMES = new Set();

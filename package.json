@@ -12,6 +12,7 @@
     "dev": "yarn build --watch"
   },
   "devDependencies": {
+    "postcss-simple-vars": "^5.0.2",
     "prettier": "1.19.1",
     "rollup": "^1.32.0",
     "rollup-plugin-copy": "^3.3.0",

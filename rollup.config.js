@@ -1,5 +1,7 @@
 import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
+import vars from 'postcss-simple-vars';
+import { USER_NAME_SELECTOR } from './src/css-variables';
 
 export default [
   {
@@ -14,6 +16,13 @@ export default [
       }),
       postcss({
         extract: true,
+        plugins: [
+          vars({
+            variables: {
+              USER_NAME_SELECTOR,
+            },
+          }),
+        ],
       }),
     ],
   },
