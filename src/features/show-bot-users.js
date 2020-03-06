@@ -1,5 +1,6 @@
 import { BOT_SELECTOR } from '../css-variables';
-import { observe, insertDynamicStyle } from '../utils/dom-utils';
+import observe from '../utils/observe-selector';
+import insertDynamicStyle from '../utils/insert-dynamic-style';
 import { isBot, addBot, removeUnbiasedName } from '../utils/unbiased-names';
 
 function showUnbiasedName(element) {
@@ -17,19 +18,19 @@ function showUnbiasedName(element) {
 
   if (!isBot(userName)) {
     addBot(userName);
-    insertDynamicStyle(`
-img[alt="${userName}"], img[alt="@${userName}"] {
-  content: none !important;
-  pointer-events: auto !important;
-}
-    `);
+    insertDynamicStyle(
+      [`img[alt="${userName}"]`, `img[alt="@${userName}"]`],
+      `content: none !important; pointer-events: auto !important;`
+    );
   }
 
   removeUnbiasedName(userName);
 }
 
-observe(BOT_SELECTOR, element => {
-  if (element.innerText === 'bot') {
-    showUnbiasedName(element.previousElementSibling);
-  }
-});
+export default function showBotUsers() {
+  return observe(BOT_SELECTOR, element => {
+    if (element.innerText === 'bot') {
+      showUnbiasedName(element.previousElementSibling);
+    }
+  });
+}

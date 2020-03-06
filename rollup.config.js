@@ -2,6 +2,7 @@ import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import vars from 'postcss-simple-vars';
+import prefixer from 'postcss-prefix-selector';
 import { USER_NAME_SELECTOR } from './src/css-variables';
 
 export default [
@@ -23,6 +24,9 @@ export default [
               USER_NAME_SELECTOR,
             },
           }),
+          prefixer({
+            prefix: 'html:not([data-unbiased="disabled"])',
+          }),
         ],
       }),
       resolve(),
@@ -34,5 +38,6 @@ export default [
       file: 'dist/background.js',
       format: 'cjs',
     },
+    plugins: [resolve()],
   },
 ];

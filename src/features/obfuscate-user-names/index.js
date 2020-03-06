@@ -1,5 +1,5 @@
 import { USER_NAME_SELECTOR } from '../../css-variables';
-import { observe } from '../../utils/dom-utils';
+import observe from '../../utils/observe-selector';
 import {
   getUnbiasedName,
   isBot,
@@ -8,7 +8,7 @@ import {
 import getUserLoginName from '../../utils/get-user-login-name';
 import './content.css';
 
-function obfuscateUserName(element) {
+function obfuscateUserNameElement(element) {
   let userName = element.innerText;
   let prefix = '';
 
@@ -42,8 +42,25 @@ function obfuscateUserName(element) {
       /\/([\w-_]+)$/,
       (_, name) => `/@unbiased/?unbiased-name=${encryptUserName(name)}`
     );
+    element.dataset.biasedHref = href;
     element.setAttribute('href', unbiasedHref);
   }
 }
 
-observe(USER_NAME_SELECTOR, obfuscateUserName);
+export default function obfuscateUserNames() {
+  const unobserve = observe(USER_NAME_SELECTOR, obfuscateUserNameElement);
+
+  return () => {
+    unobserve();
+
+    document.querySelectorAll('[data-biased-user-name]').forEach(element => {
+      element.innerText = element.dataset.biasedUserName;
+      delete element.dataset.biasedUserName;
+    });
+
+    document.querySelectorAll('[data-biased-href]').forEach(element => {
+      element.setAttribute('href', element.dataset.biasedHref);
+      delete element.dataset.biasedHref;
+    });
+  };
+}
