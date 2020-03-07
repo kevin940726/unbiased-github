@@ -2,14 +2,12 @@
 img.avatar:not([alt='']),
 .avatar > img:not([alt='']) {
   content: url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png);
-  pointer-events: none;
 }
 
 /* Don't hide avatars in checks part of the PR (mostly bots here) */
 [data-updatable-content-scroll-position-id='merge-status-list']
   img.avatar:not([alt='']) {
   content: none;
-  pointer-events: auto;
 }
 
 /* Hide participant avatars */

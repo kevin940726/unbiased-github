@@ -1,11 +1,8 @@
 import { BOT_SELECTOR } from '../css-variables';
 import observe from '../utils/observe-selector';
-import createDynamicStylesheet from '../utils/create-dynamic-stylesheet';
 import { isBot, addBot, removeUnbiasedName } from '../utils/unbiased-names';
 
 export default function showBotUsers() {
-  const stylesheet = createDynamicStylesheet('show-unbiased-name');
-
   function showUnbiasedName(element) {
     const biasedUserName = element.dataset.biasedUserName;
     let userName;
@@ -21,11 +18,6 @@ export default function showBotUsers() {
 
     if (!isBot(userName)) {
       addBot(userName);
-
-      stylesheet.insertStyle(
-        [`img[alt="${userName}"]`, `img[alt="@${userName}"]`],
-        `content: none !important; pointer-events: auto !important;`
-      );
     }
 
     removeUnbiasedName(userName);
@@ -39,6 +31,5 @@ export default function showBotUsers() {
 
   return () => {
     unobserve();
-    stylesheet.remove();
   };
 }

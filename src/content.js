@@ -4,8 +4,8 @@ import obfuscateReactionTooltips from './features/obfuscate-reaction-tooltips';
 import showBotUsers from './features/show-bot-users';
 import obfuscateUserNames from './features/obfuscate-user-names';
 import obfuscateUserLinks from './features/obfuscate-user-links';
+import hideAvatars from './features/hide-avatars';
 // CSS based features are automatically injected or disabled
-import './features/hide-avatars.css';
 import './features/hide-comment-labels.css';
 
 const features = [
@@ -14,6 +14,7 @@ const features = [
   showBotUsers,
   obfuscateUserNames,
   obfuscateUserLinks,
+  hideAvatars,
 ];
 
 // Hold a list of disabler functions
