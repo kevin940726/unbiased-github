@@ -1,3 +1,5 @@
+import { PREFIX } from '../css-variables';
+
 function createDynamicStylesheet(styleName) {
   let styleElement = document.head.querySelector(
     `.unbiased-style[data-style-name="${styleName}"]`
@@ -28,11 +30,8 @@ function insertStyle(
 
   const prefixedSelector = []
     .concat(selector)
-    .map(s =>
-      includePrefix
-        ? `html:not([data-unbiased="disabled"]) ${s.trim()}`
-        : s.trim()
-    )
+    .map(s => s.trim())
+    .map(s => (includePrefix ? `${PREFIX} ${s}` : s))
     .join(',');
 
   const rule = `${prefixedSelector.trim()}{${style.trim()}}`;

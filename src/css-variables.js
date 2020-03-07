@@ -1,3 +1,5 @@
+export const PREFIX = 'html:not([data-unbiased="disabled"])';
+
 export const USER_NAME_SELECTOR = [
   'a.author',
   'a.author:hover',
