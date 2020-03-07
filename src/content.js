@@ -1,11 +1,9 @@
-import { disableDynamicStylesheet } from './utils/insert-dynamic-style';
-
 // Features
 import disableHovercard from './features/disable-hovercard';
 import obfuscateReactionTooltips from './features/obfuscate-reaction-tooltips';
 import showBotUsers from './features/show-bot-users';
 import obfuscateUserNames from './features/obfuscate-user-names';
-
+// CSS based features are automatically injected or disabled
 import './features/hide-avatars.css';
 import './features/hide-comment-labels.css';
 
@@ -25,8 +23,6 @@ function toggleFeatures() {
 
     disable.forEach(fn => fn());
     disable = null;
-
-    disableDynamicStylesheet();
   } else {
     document.documentElement.dataset.unbiased = 'enabled';
 

@@ -10,14 +10,16 @@ function createObserver() {
         if ('querySelectorAll' in node) {
           listeners.forEach(([selector, callback]) => {
             const elements = node.querySelectorAll(selector);
-            elements.forEach(element => callback(element));
+            elements.forEach(
+              element => console.log('added', element) || callback(element)
+            );
           });
         }
       });
     } else if (mutation.type === 'attributes') {
       listeners.forEach(([selector, callback]) => {
         if (mutation.target.matches(selector)) {
-          callback(mutation.target);
+          console.log('attr', mutation.target) || callback(mutation.target);
         }
       });
     }

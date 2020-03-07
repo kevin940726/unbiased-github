@@ -1,11 +1,13 @@
 import getUserLoginName from '../utils/get-user-login-name';
-import insertDynamicStyle from '../utils/insert-dynamic-style';
+import createDynamicStylesheet from '../utils/create-dynamic-stylesheet';
 
 export default function disableHovercard() {
   const userLoginName = getUserLoginName();
 
+  const stylesheet = createDynamicStylesheet('disable-hovercard');
+
   // allow hovercard on your profile pictures
-  insertDynamicStyle(
+  stylesheet.insertStyle(
     [`img[alt="${userLoginName}"]`, `img[alt="@${userLoginName}"]`],
     `content: none !important; pointer-events: auto !important;`
   );
@@ -25,5 +27,6 @@ export default function disableHovercard() {
 
   return () => {
     document.removeEventListener('mouseover', handleMouseOver, true);
+    stylesheet.remove();
   };
 }
