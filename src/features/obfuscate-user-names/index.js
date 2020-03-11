@@ -5,7 +5,7 @@ import getUserLoginName from '../../utils/get-user-login-name';
 import './content.css';
 
 function obfuscateUserNameElement(element) {
-  let userName = element.innerText;
+  let userName = element.innerText.trim();
   let prefix = '';
 
   if (userName.startsWith('@')) {
