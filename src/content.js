@@ -8,6 +8,8 @@ import hideAvatars from './features/hide-avatars';
 // CSS based features are automatically injected or disabled
 import './features/hide-comment-labels.css';
 
+import createToggleFeaturesCheckbox from './features/create-toggle-features-checkbox';
+
 const features = [
   disableHovercard,
   obfuscateReactionTooltips,
@@ -33,4 +35,4 @@ function toggleFeatures() {
   }
 }
 
-toggleFeatures();
+createToggleFeaturesCheckbox(true, toggleFeatures);

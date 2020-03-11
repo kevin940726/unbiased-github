@@ -1,0 +1,20 @@
+html .toggle-unbiased-github-checkbox {
+  font-size: 18px;
+}
+
+html .gh-header-actions .toggle-unbiased-github-checkbox {
+  margin-right: 8px;
+}
+
+html .toggle-unbiased-github-checkbox input {
+  visibility: hidden;
+  position: absolute;
+}
+
+html .toggle-unbiased-github-checkbox input + span:after {
+  content: '🐵';
+}
+
+html .toggle-unbiased-github-checkbox input:checked + span:after {
+  content: '🙈';
+}

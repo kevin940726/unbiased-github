@@ -26,6 +26,8 @@ export default [
           }),
           prefixer({
             prefix: PREFIX,
+            // Ignore prefixing if the selector starts with html
+            exclude: [/^html\s/],
           }),
         ],
       }),
