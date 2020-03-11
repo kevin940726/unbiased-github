@@ -1,3 +1,5 @@
+import 'webext-dynamic-content-scripts';
+import addDomainPermissionToggle from 'webext-domain-permission-toggle';
 import { decryptUserName } from './utils/unbiased-names';
 
 function unbiasedNameRedirectHandler(details) {
@@ -19,8 +21,10 @@ function unbiasedNameRedirectHandler(details) {
 chrome.webRequest.onBeforeRequest.addListener(
   unbiasedNameRedirectHandler,
   {
-    urls: ['https://github.com/@unbiased/*'],
+    urls: ['https://*/@unbiased-github/*'],
     types: ['main_frame', 'sub_frame', 'image', 'xmlhttprequest'],
   },
   ['blocking']
 );
+
+addDomainPermissionToggle();

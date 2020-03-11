@@ -7,10 +7,12 @@
     "storage",
     "activeTab",
     "webRequest",
+    "contextMenus",
     "webRequestBlocking",
     "https://github.com/*",
     "https://gist.github.com/*"
   ],
+  "optional_permissions": ["https://*/*", "http://*/*"],
   "background": {
     "scripts": ["background.js"]
   },

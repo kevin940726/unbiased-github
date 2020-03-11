@@ -18,7 +18,7 @@ export default function obfuscateUserLinks() {
 
     const unbiasedHref = href.replace(
       /\/([\w-_]+)$/,
-      (_, name) => `/@unbiased/?unbiased-name=${encryptUserName(name)}`
+      (_, name) => `/@unbiased-github/?unbiased-name=${encryptUserName(name)}`
     );
 
     anchorElement.dataset.biasedHref = href;
