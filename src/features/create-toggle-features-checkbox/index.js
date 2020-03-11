@@ -32,10 +32,6 @@ export default function createToggleFeaturesCheckbox(
   initialIsEnabled,
   toggleFeatures
 ) {
-  if (initialIsEnabled) {
-    toggleFeatures();
-  }
-
   function handleChangeCheckbox(e) {
     const checked = e.target.checked;
 

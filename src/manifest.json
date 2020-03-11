@@ -4,23 +4,19 @@
   "description": "Encourage unbiased reviews and discussions on GitHub",
   "manifest_version": 2,
   "permissions": [
+    "storage",
     "activeTab",
     "webRequest",
     "webRequestBlocking",
-    "https://github.com/*"
+    "https://github.com/*",
+    "https://gist.github.com/*"
   ],
   "background": {
     "scripts": ["background.js"]
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://github.com/*/issues*",
-        "https://github.com/*/issue/*",
-        "https://github.com/*/pulls*",
-        "https://github.com/*/pull/*",
-        "https://gist.github.com/*"
-      ],
+      "matches": ["https://github.com/*", "https://gist.github.com/*"],
       "css": ["content.css"],
       "js": ["content.js"]
     }
