@@ -3,6 +3,8 @@ import './content.css';
 const CLASS_NAME = 'toggle-unbiased-github-checkbox';
 const STICKY_HEADER_SELECTOR = '.gh-header-sticky:not(.is-placeholder) .d-flex';
 const TOP_HEADER_SELECTOR = '.gh-header-actions';
+const NEW_BUTTON_SELECTOR =
+  'div[role="search"] + div.d-flex > [data-hotkey="c"]';
 
 const checkboxElements = new Set();
 
@@ -44,24 +46,34 @@ export default function createToggleFeaturesCheckbox(
     toggleFeatures();
   }
 
-  const stickyCheckbox = createCheckbox({
-    onChange: handleChangeCheckbox,
-    checked: initialIsEnabled,
-  });
-  const topCheckbox = createCheckbox({
-    onChange: handleChangeCheckbox,
-    checked: initialIsEnabled,
-  });
-
   const stickyHeader = document.querySelector(STICKY_HEADER_SELECTOR);
-  stickyHeader.appendChild(stickyCheckbox);
+  if (stickyHeader) {
+    const stickyCheckbox = createCheckbox({
+      onChange: handleChangeCheckbox,
+      checked: initialIsEnabled,
+    });
+
+    stickyHeader.appendChild(stickyCheckbox);
+  }
 
   const topHeader = document.querySelector(TOP_HEADER_SELECTOR);
-  topHeader.prepend(topCheckbox);
+  if (topHeader) {
+    const topCheckbox = createCheckbox({
+      onChange: handleChangeCheckbox,
+      checked: initialIsEnabled,
+    });
 
-  return () => {
-    checkboxElements.clear();
-    stickyHeader.removeChild(stickyCheckbox);
-    topHeader.removeChild(topCheckbox);
-  };
+    topHeader.prepend(topCheckbox);
+  }
+
+  const newButton = document.querySelector(NEW_BUTTON_SELECTOR);
+  if (newButton) {
+    const newButtonCheckbox = createCheckbox({
+      onChange: handleChangeCheckbox,
+      checked: initialIsEnabled,
+    });
+    newButtonCheckbox.classList.remove('btn-sm');
+
+    newButton.insertAdjacentElement('beforebegin', newButtonCheckbox);
+  }
 }

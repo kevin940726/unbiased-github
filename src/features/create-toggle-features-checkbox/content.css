@@ -2,8 +2,15 @@ html .toggle-unbiased-github-checkbox {
   font-size: 18px;
 }
 
-html .gh-header-actions .toggle-unbiased-github-checkbox {
+html .toggle-unbiased-github-checkbox:not(:last-child) {
   margin-right: 8px;
+}
+
+html .gh-header-actions > *:first-child {
+  margin: 0 !important;
+}
+html .gh-header-actions > *:not(:first-child) {
+  margin-left: 8px !important;
 }
 
 html .toggle-unbiased-github-checkbox input {
@@ -13,6 +20,8 @@ html .toggle-unbiased-github-checkbox input {
 
 html .toggle-unbiased-github-checkbox input + span:after {
   content: '🐵';
+  /* Visual position alignment */
+  margin-right: -3px;
 }
 
 html .toggle-unbiased-github-checkbox input:checked + span:after {
