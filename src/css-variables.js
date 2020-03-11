@@ -3,11 +3,7 @@ export const PREFIX = 'html:not([data-unbiased="disabled"])';
 export const USER_NAME_SELECTOR = [
   'a.author',
   'a.author:hover',
-  /* Mentions */
-  '.user-mention',
-  /* Assignees */
-  '.assignee',
-  '.assignee.link-gray-dark',
+  '[data-hovercard-type="user"]',
   /* Edit history */
   '.js-comment-edit-history-menu .v-align-middle.text-bold',
   /* Head ref branch */
@@ -16,8 +12,6 @@ export const USER_NAME_SELECTOR = [
   '.hovercard-icon + div > span.text-bold',
   /* Head ref branch inside hovercard */
   '.commit-ref:not(.base-ref) > .user',
-  /* issues/PRs page author names */
-  'a[data-hovercard-type="user"]',
 ]
   .map(selector => selector + ':not([data-biased-user-name])')
   .join(',');
