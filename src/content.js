@@ -8,7 +8,7 @@ import hideAvatars from './features/hide-avatars';
 // CSS based features are automatically injected or disabled
 import './features/hide-comment-labels.css';
 
-import createToggleFeaturesCheckbox from './features/create-toggle-features-checkbox';
+import renderToggleFeaturesCheckbox from './features/render-toggle-features-checkbox';
 
 const ENABLED_PATHS = [
   /\/[\w-_]+\/[\w-_]+\/issues\//,
@@ -55,27 +55,22 @@ function disableFeatures() {
   disablers = null;
 }
 
-function toggleFeatures() {
-  chrome.storage.sync.get(
-    {
-      isEnabled: true,
-    },
-    ({ isEnabled }) => {
-      if (isEnabled) {
-        disableFeatures();
+function setIsEnabled(isEnabled) {
+  chrome.storage.sync.set({ isEnabled });
+}
 
-        chrome.storage.sync.set({
-          isEnabled: false,
-        });
-      } else {
-        enableFeatures();
+function handleOptionsChanged({ isEnabled }) {
+  const shouldEnable =
+    isEnabled &&
+    ENABLED_PATHS.some(pathRegex => pathRegex.test(location.pathname));
 
-        chrome.storage.sync.set({
-          isEnabled: true,
-        });
-      }
-    }
-  );
+  if (shouldEnable) {
+    enableFeatures();
+  } else {
+    disableFeatures();
+  }
+
+  renderToggleFeaturesCheckbox(shouldEnable, setIsEnabled);
 }
 
 function init() {
@@ -83,22 +78,13 @@ function init() {
     {
       isEnabled: true,
     },
-    ({ isEnabled }) => {
-      if (
-        isEnabled &&
-        ENABLED_PATHS.some(pathRegex => pathRegex.test(location.pathname))
-      ) {
-        enableFeatures();
-
-        createToggleFeaturesCheckbox(true, toggleFeatures);
-      } else {
-        disableFeatures();
-
-        createToggleFeaturesCheckbox(false, toggleFeatures);
-      }
-    }
+    handleOptionsChanged
   );
 }
+
+chrome.storage.onChanged.addListener(({ isEnabled: { newValue: isEnabled } }) =>
+  handleOptionsChanged({ isEnabled })
+);
 
 document.addEventListener('pjax:end', init);
 init();

@@ -6,16 +6,15 @@ const TOP_HEADER_SELECTOR = '.gh-header-actions';
 const NEW_BUTTON_SELECTOR =
   'div[role="search"] + div.d-flex > [data-hotkey="c"]';
 
-const checkboxElements = new Set();
+const checkboxElements = {};
 
-function createCheckbox({ onChange, checked }) {
+function createCheckbox(name, onChange) {
   const label = document.createElement('label');
   label.className = `${CLASS_NAME} btn btn-sm tooltipped tooltipped-w`;
   label.setAttribute('aria-label', 'Toggle unbiased-github');
 
   const input = document.createElement('input');
   input.type = 'checkbox';
-  input.checked = checked;
   input.addEventListener('change', onChange);
 
   const text = document.createElement('span');
@@ -23,53 +22,39 @@ function createCheckbox({ onChange, checked }) {
   label.appendChild(input);
   label.appendChild(text);
 
-  checkboxElements.add(input);
+  checkboxElements[name] = input;
 
   return label;
 }
 
-export default function createToggleFeaturesCheckbox(
-  initialIsEnabled,
-  toggleFeatures
-) {
+export default function renderToggleFeaturesCheckbox(isEnabled, setIsEnabled) {
   function handleChangeCheckbox(e) {
-    const checked = e.target.checked;
-
-    checkboxElements.forEach(input => {
-      input.checked = checked;
-    });
-
-    toggleFeatures();
+    setIsEnabled(e.target.checked);
   }
 
   const stickyHeader = document.querySelector(STICKY_HEADER_SELECTOR);
-  if (stickyHeader) {
-    const stickyCheckbox = createCheckbox({
-      onChange: handleChangeCheckbox,
-      checked: initialIsEnabled,
-    });
+  if (stickyHeader && !checkboxElements.stickyHeader) {
+    const stickyCheckbox = createCheckbox('stickyHeader', handleChangeCheckbox);
 
     stickyHeader.appendChild(stickyCheckbox);
   }
 
   const topHeader = document.querySelector(TOP_HEADER_SELECTOR);
-  if (topHeader) {
-    const topCheckbox = createCheckbox({
-      onChange: handleChangeCheckbox,
-      checked: initialIsEnabled,
-    });
+  if (topHeader && !checkboxElements.topHeader) {
+    const topCheckbox = createCheckbox('topHeader', handleChangeCheckbox);
 
     topHeader.prepend(topCheckbox);
   }
 
   const newButton = document.querySelector(NEW_BUTTON_SELECTOR);
-  if (newButton) {
-    const newButtonCheckbox = createCheckbox({
-      onChange: handleChangeCheckbox,
-      checked: initialIsEnabled,
-    });
+  if (newButton && !checkboxElements.newButton) {
+    const newButtonCheckbox = createCheckbox('newButton', handleChangeCheckbox);
     newButtonCheckbox.classList.remove('btn-sm');
 
     newButton.insertAdjacentElement('beforebegin', newButtonCheckbox);
   }
+
+  Object.values(checkboxElements).forEach(checkbox => {
+    checkbox.checked = isEnabled;
+  });
 }
