@@ -11,8 +11,8 @@ import './features/hide-comment-labels.css';
 import renderToggleFeaturesCheckbox from './features/render-toggle-features-checkbox';
 
 const ENABLED_PATHS = [
-  /\/[\w-_]+\/[\w-_]+\/issues\//,
-  /\/[\w-_]+\/[\w-_]+\/pulls\//,
+  /\/[\w-_]+\/[\w-_]+\/issues/,
+  /\/[\w-_]+\/[\w-_]+\/pulls/,
   /\/[\w-_]+\/[\w-_]+\/issue\//,
   /\/[\w-_]+\/[\w-_]+\/pull\//,
 ];
@@ -46,11 +46,7 @@ function disableFeatures() {
     return;
   }
 
-  try {
-    disablers.forEach(fn => fn());
-  } catch (err) {
-    // ignore errors;
-  }
+  disablers.forEach(fn => fn());
 
   disablers = null;
 }
@@ -60,17 +56,16 @@ function setIsEnabled(isEnabled) {
 }
 
 function handleOptionsChanged({ isEnabled }) {
-  const shouldEnable =
-    isEnabled &&
-    ENABLED_PATHS.some(pathRegex => pathRegex.test(location.pathname));
+  renderToggleFeaturesCheckbox(isEnabled, setIsEnabled);
 
-  if (shouldEnable) {
+  if (
+    isEnabled &&
+    ENABLED_PATHS.some(pathRegex => pathRegex.test(location.pathname))
+  ) {
     enableFeatures();
   } else {
     disableFeatures();
   }
-
-  renderToggleFeaturesCheckbox(shouldEnable, setIsEnabled);
 }
 
 function init() {
@@ -87,4 +82,4 @@ chrome.storage.onChanged.addListener(({ isEnabled: { newValue: isEnabled } }) =>
 );
 
 document.addEventListener('pjax:end', init);
-init();
+document.addEventListener('DOMContentLoaded', init);
