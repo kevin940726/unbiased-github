@@ -3,8 +3,7 @@ import './content.css';
 const CLASS_NAME = 'toggle-unbiased-github-checkbox';
 const STICKY_HEADER_SELECTOR = '.gh-header-sticky:not(.is-placeholder) .d-flex';
 const TOP_HEADER_SELECTOR = '.gh-header-actions';
-const NEW_BUTTON_SELECTOR =
-  'div[role="search"] + div.d-flex > [data-hotkey="c"]';
+const NEW_BUTTON_SELECTOR = '[data-hotkey="c"]';
 
 const checkboxElements = {};
 
