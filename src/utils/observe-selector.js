@@ -1,27 +1,17 @@
 const listeners = new Set();
 let observer = null;
 
+function queryElements(selector, callback) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(element => callback(element));
+}
+
 function createObserver() {
-  const observer = new MutationObserver(handler);
-
-  function handler([mutation]) {
-    [...mutation.addedNodes, mutation.target].forEach(node => {
-      if ('matches' in node) {
-        listeners.forEach(([selector, callback]) => {
-          if (node.matches(selector)) {
-            callback(mutation.target);
-          }
-        });
-      }
-
-      if ('querySelectorAll' in node) {
-        listeners.forEach(([selector, callback]) => {
-          const elements = node.querySelectorAll(selector);
-          elements.forEach(element => callback(element));
-        });
-      }
+  const observer = new MutationObserver(() => {
+    listeners.forEach(([selector, callback]) => {
+      queryElements(selector, callback);
     });
-  }
+  });
 
   observer.observe(document.documentElement, {
     attributes: true,
@@ -34,8 +24,7 @@ function createObserver() {
 }
 
 function observe(selector, callback) {
-  const elements = document.querySelectorAll(selector);
-  elements.forEach(element => callback(element));
+  queryElements(selector, callback);
 
   const listener = [selector, callback];
 

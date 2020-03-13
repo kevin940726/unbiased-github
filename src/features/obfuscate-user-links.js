@@ -10,6 +10,7 @@ export default function obfuscateUserLinks() {
     const href = anchorElement.getAttribute('href');
 
     if (
+      anchorElement.dataset.biasedHref ||
       href.startsWith(`/${userLoginName}`) ||
       href.startsWith(`${location.origin}/${userLoginName}`)
     ) {
