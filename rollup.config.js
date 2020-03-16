@@ -7,6 +7,8 @@ import {
   USER_NAME_SELECTOR,
   PREFIX,
   TRANSPARENT_IMAGE,
+  SEE_NO_EVIL_IMAGE,
+  MONKEY_FACE_IMAGE,
 } from './src/css-variables';
 
 export default [
@@ -27,6 +29,8 @@ export default [
             variables: {
               USER_NAME_SELECTOR,
               TRANSPARENT_IMAGE,
+              SEE_NO_EVIL_IMAGE,
+              MONKEY_FACE_IMAGE,
             },
           }),
           prefixer({

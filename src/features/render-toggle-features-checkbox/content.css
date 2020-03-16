@@ -1,5 +1,8 @@
 html .toggle-unbiased-github-checkbox {
-  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 html .toggle-unbiased-github-checkbox:not(:last-child) {
@@ -18,12 +21,12 @@ html .toggle-unbiased-github-checkbox input {
   position: absolute;
 }
 
-html .toggle-unbiased-github-checkbox input + span:after {
-  content: '🐵';
-  /* Visual position alignment */
-  margin-right: -3px;
+html .toggle-unbiased-github-checkbox input + img {
+  content: $MONKEY_FACE_IMAGE;
+  height: 20px;
+  width: 20px;
 }
 
-html .toggle-unbiased-github-checkbox input:checked + span:after {
-  content: '🙈';
+html .toggle-unbiased-github-checkbox input:checked + img {
+  content: $SEE_NO_EVIL_IMAGE;
 }

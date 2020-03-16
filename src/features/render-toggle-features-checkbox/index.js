@@ -10,16 +10,16 @@ const checkboxElements = {};
 function createCheckbox(name, onChange) {
   const label = document.createElement('label');
   label.className = `${CLASS_NAME} btn btn-sm tooltipped tooltipped-w`;
-  label.setAttribute('aria-label', 'Toggle unbiased-github');
+  label.setAttribute('aria-label', 'Toggle Unbiased GitHub');
 
   const input = document.createElement('input');
   input.type = 'checkbox';
   input.addEventListener('change', onChange);
 
-  const text = document.createElement('span');
+  const img = document.createElement('img');
 
   label.appendChild(input);
-  label.appendChild(text);
+  label.appendChild(img);
 
   checkboxElements[name] = input;
 
@@ -46,7 +46,8 @@ export default function renderToggleFeaturesCheckbox(isEnabled, setIsEnabled) {
   }
 
   const newButton = document.querySelector(NEW_BUTTON_SELECTOR);
-  if (newButton && !checkboxElements.newButton) {
+  // Only append when there's no top header, i.e. in issues/PRs page
+  if (!topHeader && newButton && !checkboxElements.newButton) {
     const newButtonCheckbox = createCheckbox('newButton', handleChangeCheckbox);
     newButtonCheckbox.classList.remove('btn-sm');
 

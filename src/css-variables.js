@@ -22,4 +22,7 @@ export const TRANSPARENT_IMAGE =
   'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)';
 
 export const SEE_NO_EVIL_IMAGE =
-  'https://github.githubassets.com/images/icons/emoji/unicode/1f648.png';
+  'url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png)';
+
+export const MONKEY_FACE_IMAGE =
+  'url(https://github.githubassets.com/images/icons/emoji/unicode/1f435.png)';

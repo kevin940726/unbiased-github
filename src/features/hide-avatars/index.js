@@ -8,10 +8,7 @@ export default function hideAvatars() {
 
   const stylesheet = createDynamicStylesheet('hide-avatars');
 
-  document.body.style.setProperty(
-    '--avatar-content',
-    `url(${SEE_NO_EVIL_IMAGE})`
-  );
+  document.body.style.setProperty('--avatar-content', SEE_NO_EVIL_IMAGE);
 
   // Don't hide your own profile pictures
   stylesheet.insertStyle(
