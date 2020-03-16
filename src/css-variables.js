@@ -3,7 +3,7 @@ export const PREFIX = 'html:not([data-unbiased="disabled"])';
 export const USER_NAME_SELECTOR = [
   'a.author',
   'a.author:hover',
-  '[data-hovercard-type="user"]',
+  '[data-hovercard-type="user"]:not([rel="author"])',
   /* Edit history */
   '.js-comment-edit-history-menu .v-align-middle.text-bold',
   /* Head ref branch */
