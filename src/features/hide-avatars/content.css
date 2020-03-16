@@ -1,7 +1,12 @@
+body {
+  --avatar-content: $TRANSPARENT_IMAGE;
+}
+
 /* Hide every profile picture */
 img.avatar:not([alt='']),
 .avatar > img:not([alt='']) {
-  content: url(https://github.githubassets.com/images/icons/emoji/unicode/1f648.png);
+  /* Set it to transparent first to avoid flash of see-no-evil image */
+  content: var(--avatar-content);
 }
 
 /* Don't hide avatars in checks part of the PR (mostly bots here) */

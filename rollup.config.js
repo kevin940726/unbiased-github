@@ -3,7 +3,11 @@ import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import vars from 'postcss-simple-vars';
 import prefixer from 'postcss-prefix-selector';
-import { USER_NAME_SELECTOR, PREFIX } from './src/css-variables';
+import {
+  USER_NAME_SELECTOR,
+  PREFIX,
+  TRANSPARENT_IMAGE,
+} from './src/css-variables';
 
 export default [
   {
@@ -22,6 +26,7 @@ export default [
           vars({
             variables: {
               USER_NAME_SELECTOR,
+              TRANSPARENT_IMAGE,
             },
           }),
           prefixer({

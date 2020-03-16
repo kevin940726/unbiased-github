@@ -17,3 +17,9 @@ export const USER_NAME_SELECTOR = [
   .join(',');
 
 export const BOT_SELECTOR = 'a.author + .Label--outline';
+
+export const TRANSPARENT_IMAGE =
+  'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)';
+
+export const SEE_NO_EVIL_IMAGE =
+  'https://github.githubassets.com/images/icons/emoji/unicode/1f648.png';
