@@ -16,6 +16,16 @@ html .gh-header-actions > *:not(:first-child) {
   margin-left: 8px !important;
 }
 
+html .js-reviews-container {
+  display: flex;
+}
+html .js-reviews-container .toggle-unbiased-github-checkbox {
+  display: none;
+}
+html .is-stuck .js-reviews-container .toggle-unbiased-github-checkbox {
+  display: inline-flex;
+}
+
 html .toggle-unbiased-github-checkbox input {
   visibility: hidden;
   position: absolute;
