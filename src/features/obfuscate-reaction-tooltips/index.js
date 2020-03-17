@@ -2,7 +2,7 @@ import getUserLoginName from '../../utils/get-user-login-name';
 import { getUnbiasedName } from '../../utils/unbiased-names';
 import './content.css';
 
-const REACTION_REGEX = /(^|,\s(?:and\s)?)([\w-_]+)/g;
+const REACTION_REGEX = /(^|,\sand\s|,\s|\sand\s)([\w-_]+)/g;
 
 function handleMouseOver(e) {
   if (
