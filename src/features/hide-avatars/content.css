@@ -1,12 +1,14 @@
-body {
-  --avatar-content: $TRANSPARENT_IMAGE;
+/* Set it to transparent first to avoid flash of see-no-evil image */
+html:not([data-unbiased]) img.avatar:not([alt='']),
+html:not([data-unbiased]) .avatar > img:not([alt='']) {
+  opacity: 0;
 }
 
-/* Hide every profile picture */
-img.avatar:not([alt='']),
-.avatar > img:not([alt='']) {
-  /* Set it to transparent first to avoid flash of see-no-evil image */
-  content: var(--avatar-content);
+/* Hide every profile picture and show see-no-evil emoji */
+html[data-unbiased='enabled'] img.avatar:not([alt='']),
+html[data-unbiased='enabled'] .avatar > img:not([alt='']) {
+  opacity: 1;
+  content: $SEE_NO_EVIL_IMAGE;
 }
 
 /* Don't hide avatars in checks part of the PR (mostly bots here) */

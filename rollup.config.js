@@ -6,7 +6,6 @@ import prefixer from 'postcss-prefix-selector';
 import {
   USER_NAME_SELECTOR,
   PREFIX,
-  TRANSPARENT_IMAGE,
   SEE_NO_EVIL_IMAGE,
   MONKEY_FACE_IMAGE,
 } from './src/css-variables';
@@ -28,7 +27,6 @@ export default [
           vars({
             variables: {
               USER_NAME_SELECTOR,
-              TRANSPARENT_IMAGE,
               SEE_NO_EVIL_IMAGE,
               MONKEY_FACE_IMAGE,
             },
@@ -36,7 +34,7 @@ export default [
           prefixer({
             prefix: PREFIX,
             // Ignore prefixing if the selector starts with html
-            exclude: [/^html\s/],
+            exclude: [/^html/],
           }),
         ],
       }),
