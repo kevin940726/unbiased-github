@@ -5,6 +5,7 @@ import showBotUsers from './features/show-bot-users';
 import obfuscateUserNames from './features/obfuscate-user-names';
 import obfuscateUserLinks from './features/obfuscate-user-links';
 import hideAvatars from './features/hide-avatars';
+import hideRghFullNames from './features/hide-rgh-full-names';
 // CSS based features are automatically injected or disabled
 import './features/hide-comment-labels.css';
 
@@ -24,6 +25,7 @@ const features = [
   obfuscateUserNames,
   obfuscateUserLinks,
   hideAvatars,
+  hideRghFullNames,
 ];
 
 // Hold a list of disabler functions
