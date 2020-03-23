@@ -1,6 +1,7 @@
 import { BOT_SELECTOR } from '../css-variables';
 import observe from '../utils/observe-selector';
 import { isBot, addBot, removeUnbiasedName } from '../utils/unbiased-names';
+import injectExceptionStyle from './hide-avatars/inject-exception-style';
 
 function showUnbiasedName(element) {
   const biasedUserName = element.dataset.biasedUserName;
@@ -16,6 +17,8 @@ function showUnbiasedName(element) {
       : biasedUserName;
     element.innerText = biasedUserName;
     element.dataset.isBot = true;
+
+    injectExceptionStyle(userName);
   } else {
     userName = element.innerText;
   }
